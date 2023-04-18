@@ -1,0 +1,7 @@
+#mdeditor {
+    top: 0;
+    width: 50%;
+    max-width: 800px;
+}
+
+@media all and (max-width: 1000px) {}
