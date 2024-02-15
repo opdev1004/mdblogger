@@ -32,4 +32,4 @@ Report an issue: [https://github.com/opdev1004/mdblogger/issues](https://github.
 [Victor Chanil Park](https://github.com/opdev1004)
 
 ## 💯 라이센스
-MIT, [LICENSE](./LICENSE) 확인.
+MIT, [LICENSE](../LICENSE) 확인.

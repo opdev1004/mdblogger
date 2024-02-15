@@ -1,7 +1,12 @@
 [한국어](./docs/ko)
+
 # ✍ mdblogger
+
+![mdblogger Image](./assets/mdbloggerscshot_00.jpg)
 Markdown editor for blogger
+
 ## 👨‍🏫 Things you must know:
+
 After you are done writing, you must edit the blogger's editor once before finishing your post. Like 'adding a space and remove it' or 'change from compose view to html view'. Because the content is not going to be saved as a draft or updated or published until the blogger editor updates the post data that is hidden.
 
 It is difficult to find where the blogger editor store our post data. So until we find a way, this will be the way. Just give a small change to the blogger editor after you are done writing.
@@ -17,17 +22,24 @@ In many other case, if this extension is not working, just try to refresh(F5) th
 ## 😵 Shortcut:
 
 ### Copy the blogger editor's html data and paste it in the markdown editor
+
 ```
 ctrl + q
 ```
+
 ## 😵 Issue:
+
 Report an issue: [https://github.com/opdev1004/mdblogger/issues](https://github.com/opdev1004/mdblogger/issues)
 
 ## 💪 Support this extension:
+
 - [Github sponsor page](https://github.com/sponsors/opdev1004)
 - [ko-fi](https://ko-fi.com/opdev1004)
+
 ## 👨‍💻 Author
+
 [Victor Chanil Park](https://github.com/opdev1004)
 
 ## 💯 License
+
 MIT, See [LICENSE](./LICENSE).

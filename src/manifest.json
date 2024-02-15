@@ -1,36 +1,23 @@
 {
-    "manifest_version": 3,
-    "name": "mdblogger",
-    "version": "0.0.1",
-    "description": "Markdown editor for blogger",
-    "icons": {
-        "16": "16.png",
-        "32": "32.png",
-        "48": "48.png",
-        "128": "128.png"
-    },
-    "author": "https://github.com/opdev1004",
-    "action": {
-        "default_popup": "popup.html"
-    },
-    "browser_specific_settings": {
-        "gecko": {
-            "id": "mdblogger@geargom.org"
-        }
-    },
-    "content_scripts": [
-        {
-            "matches": [
-                "https://www.blogger.com/blog/post/edit/*"
-            ],
-            "css": [
-                "toastui-editor.min.css",
-                "main.css"
-            ],
-            "js": [
-                "toastui-editor-all.min.js",
-                "main.js"
-            ]
-        }
-    ]
+  "manifest_version": 3,
+  "name": "mdblogger",
+  "version": "0.0.2",
+  "description": "Markdown editor for blogger",
+  "icons": {
+    "16": "16.png",
+    "32": "32.png",
+    "48": "48.png",
+    "128": "128.png"
+  },
+  "author": "https://github.com/opdev1004",
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://www.blogger.com/blog/post/edit/*"],
+      "css": ["toastui-editor.min.css", "main.css"],
+      "js": ["toastui-editor-all.min.js", "main.js"]
+    }
+  ]
 }
