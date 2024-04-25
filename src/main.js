@@ -44,14 +44,14 @@ async function setup()
     const iframeDoc = editorIframe.contentWindow.document
     const oldEditor = iframeDoc.body;
 
-    editor.setHTML(oldEditor.innerHTML);
+    editor.setHTML(await reformatLinks(oldEditor.innerHTML));
     editor.moveCursorToStart();
 
-    const editorObserver = new MutationObserver(debounce((mutationList, observer) =>
+    const editorObserver = new MutationObserver(debounce(async (mutationList, observer) =>
     {
         if (editor.getHTML() !== oldEditor.innerHTML) 
         {
-            editor.setHTML(oldEditor.innerHTML);
+            editor.setHTML(await reformatLinks(oldEditor.innerHTML));
         }
     }), 500);
 
@@ -65,7 +65,7 @@ async function setup()
     let mdCtrlKey = false;
     let mcQKey = false;
 
-    document.addEventListener('keydown', (event) =>
+    document.addEventListener('keydown', async (event) =>
     {
         if (event.ctrlKey)
         {
@@ -79,7 +79,8 @@ async function setup()
 
         if (mdCtrlKey && mcQKey)
         {
-            editor.setHTML(oldEditor.innerHTML);
+            editor.setHTML(await reformatLinks(oldEditor.innerHTML));
+            event.preventDefault();
         }
     });
 
@@ -96,7 +97,7 @@ async function setup()
         }
     });
 
-    iframeDoc.addEventListener('keydown', (event) =>
+    iframeDoc.addEventListener('keydown', async (event) =>
     {
         if (event.ctrlKey)
         {
@@ -110,7 +111,8 @@ async function setup()
 
         if (mdCtrlKey && mcQKey)
         {
-            editor.setHTML(oldEditor.innerHTML);
+            editor.setHTML(await reformatLinks(oldEditor.innerHTML));
+            event.preventDefault();
         }
     });
 
@@ -126,6 +128,38 @@ async function setup()
             mcQKey = false;
         }
     });
+
+
+    async function reformatLinks(innerHTML)
+    {
+        const tempElement = document.createElement('div');
+        tempElement.innerHTML = innerHTML;
+        const links = tempElement.querySelectorAll('a');
+
+        links.forEach(link =>
+        {
+            const originalAttrs = link.getAttribute('data-original-attrs');
+
+            if (originalAttrs)
+            {
+                const originalAttrsObject = JSON.parse(originalAttrs);
+                link.setAttribute('href', originalAttrsObject['data-original-href']);
+
+                if (originalAttrsObject['target'])
+                {
+                    link.setAttribute('target', originalAttrsObject['target']);
+                }
+
+                link.removeAttribute('data-original-attrs');
+            }
+        });
+
+        return tempElement.innerHTML;
+    }
+
+
+
+
 
     let buttonsDiv = document.createElement('div');
     buttonsDiv.className = "buttons";
@@ -240,8 +274,13 @@ async function setup()
         const blob = new Blob([editor.getMarkdown()], { type: 'text/plain' });
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
+        const title = document.querySelector('[aria-label="Title"]');
+        let filename = title.getAttribute('data-initial-value');
+
+        if (title.length > 64) filename = filename.substring(0, 64);
+
         a.href = url;
-        a.download = 'blogger_post.md';
+        a.download = `${ filename }.md`;
         document.body.appendChild(a);
         a.click();
         URL.revokeObjectURL(url);
@@ -250,8 +289,13 @@ async function setup()
 
     async function doSaveAsMarkdownButton()
     {
+        const title = document.querySelector('[aria-label="Title"]');
+        let filename = title.getAttribute('data-initial-value');
+
+        if (title.length > 64) filename = filename.substring(0, 64);
+
         const fileHandle = await window.showSaveFilePicker({
-            suggestedName: 'blogger_post.md',
+            suggestedName: `${ filename }.md`,
             types: [{
                 description: 'Markdown Files',
                 accept: {
