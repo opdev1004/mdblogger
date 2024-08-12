@@ -59,7 +59,6 @@ async function setup()
 
     editor.on("change", debounce(() =>
     {
-        oldEditor.focus();
         oldEditor.innerHTML = editor.getHTML();
         const enterKeydownEvent = new KeyboardEvent("keydown", { key: "Enter" });
         const enterKeypressEvent = new KeyboardEvent("keypress", { key: "Enter" });
@@ -67,8 +66,7 @@ async function setup()
         oldEditor.dispatchEvent(enterKeydownEvent);
         oldEditor.dispatchEvent(enterKeypressEvent);
         oldEditor.dispatchEvent(enterKeyupEvent);
-        editor.focus();
-    }, 16));
+    }, 17));
 
     let mdCtrlKey = false;
     let mcQKey = false;
