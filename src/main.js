@@ -59,7 +59,15 @@ async function setup()
 
     editor.on("change", debounce(() =>
     {
+        oldEditor.focus();
         oldEditor.innerHTML = editor.getHTML();
+        const enterKeydownEvent = new KeyboardEvent("keydown", { key: "Enter" });
+        const enterKeypressEvent = new KeyboardEvent("keypress", { key: "Enter" });
+        const enterKeyupEvent = new KeyboardEvent("keyup", { key: "Enter" });
+        oldEditor.dispatchEvent(enterKeydownEvent);
+        oldEditor.dispatchEvent(enterKeypressEvent);
+        oldEditor.dispatchEvent(enterKeyupEvent);
+        editor.focus();
     }, 16));
 
     let mdCtrlKey = false;
@@ -348,6 +356,21 @@ async function setup()
     buttonsDiv.appendChild(donationButton);
     buttonsDiv.appendChild(githubButton);
     buttonsDiv.appendChild(reportButton);
+    let tooltip = document.createElement("div");
+    tooltip.innerHTML = `
+        MD Blogger Tooltip: <br /><br />
+        Pressing 'Ctrl' and 'q' will copy what is in the blogger editor (Left) and paste to the markdown editor (Right).
+        <br /><br />
+        If this extension is not working, just try to refresh(F5) the edit page.
+        <br /><br />
+        Don't forget to support this extension! Thank you!
+        `
+    tooltip.style.width = "150px";
+    tooltip.style.backgroundColor = "#cccccc";
+    tooltip.style.margin = "8px";
+    tooltip.style.padding = "8px 12px";
+    tooltip.style.borderRadius = "4px";
+    buttonsDiv.appendChild(tooltip);
     editorIframeParent.insertBefore(buttonsDiv, editorIframeParent[1]);
 
 }

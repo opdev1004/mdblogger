@@ -7,9 +7,9 @@ Markdown editor for blogger
 
 ## 📢 Notice
 
-### Releasing v0.0.5
+### Releasing v0.0.6
 
-Fixed all links of href turning into # problems. Added post title as a file name for mark down save and load.
+Finally, from this version, draft saving working! Tooltip is added. Happy blogging!
 
 ## 👨‍🏫 Things you must know:
 
