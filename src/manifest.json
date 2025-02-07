@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "mdblogger",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Markdown editor for blogger",
   "icons": {
     "16": "16.png",

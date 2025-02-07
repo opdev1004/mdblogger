@@ -7,6 +7,9 @@ Markdown editor for blogger
 
 ## 📢 Notice
 
+### Releasing v0.0.8
+Fixed editor scroll bar.
+
 ### Releasing v0.0.7
 
 Found Korean and other typing not working. So this version fixes that problem. Adjusted update speed to about 59 fps.
